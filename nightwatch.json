@@ -45,7 +45,27 @@
         "browserName": "chrome",
         "version": "latest"
       }
-    }
-    
+    },
+    "firefox": {
+      "desiredCapabilities": {
+        "platform": "linux",
+        "browserName": "firefox",
+        "version": "latest"
+      }
+    },
+    "ie": {
+      "desiredCapabilities": {
+        "platform": "Windows 10",
+        "browserName": "internet explorer",
+        "version": "latest"
+      }
+    },
+    "edge": {
+      "desiredCapabilities": {
+        "platform": "Windows 10",
+        "browserName": "MicrosoftEdge",
+        "version": "latest"
+      }
+    }    
   }
 }
