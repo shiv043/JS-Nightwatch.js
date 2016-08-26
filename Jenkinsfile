@@ -23,7 +23,7 @@ node {
             wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
                 // Run selenium tests using Nightwatch.js
                 // Ignore error codes. The junit publisher will cover setting build status.
-                sh "./node_modules/.bin/nightwatch -e ${platform_configs} --test tests/guineaPig.js || true"
+                sh "./node_modules/.bin/nightwatch -e ${platform_configs} || true"
             }
 
             junit 'reports/**'
