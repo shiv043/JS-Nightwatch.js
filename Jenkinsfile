@@ -26,7 +26,9 @@ node {
                 sh "./node_modules/.bin/nightwatch -e ${platform_configs} --test tests/guineaPig.js || true"
             }
 
-            junit 'reports/**'
+            step([$class: 'XUnitBuilder',
+                thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
+                tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
 
             step([$class: 'SauceOnDemandTestPublisher'])
         }
