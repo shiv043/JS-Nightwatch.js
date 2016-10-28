@@ -27,9 +27,9 @@ node {
             }
 
             step([$class: 'XUnitBuilder',
-                thresholds: [[$class: 'FailedThreshold', unstableThreshold: '1']],
+                thresholds: [[$class: 'FailedThreshold', failureThreshold: '4']],
                 tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
-
+            
             step([$class: 'SauceOnDemandTestPublisher'])
         }
     }
