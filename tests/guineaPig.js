@@ -40,6 +40,11 @@ module.exports = {
             .assert.title('I am a page title - Sauce Labs');
     },
 
+    'Guinea Pig Assert Title 0 - Suite Completed': function(client) {
+      // No assertion needed
+    },
+
+
     afterEach: function(client, done) {
         client.customSauceEnd();
 
