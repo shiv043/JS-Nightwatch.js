@@ -9,7 +9,7 @@ module.exports = {
         client
             .url('https://saucelabs.com/test/guinea-pig')
             .waitForElementVisible('body', 1000)
-            .assert.title('I am a page title - Sauce Labs - A');
+            .assert.title('I am a page title - Sauce Labs');
     },
 
     'Guinea Pig Assert Title 1 - B': function(client) {
