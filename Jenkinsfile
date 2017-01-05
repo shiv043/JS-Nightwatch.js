@@ -4,7 +4,7 @@ node {
 
     // https://issues.jenkins-ci.org/browse/JENKINS-37658
     // manually clean after checkout
-    sh 'gir clean -xfd'
+    sh 'git clean -xfd'
 
     // Install dependencies
     sh 'npm install'
