@@ -19,6 +19,7 @@ node {
         // List of browser configs we'll be testing against.
         def platform_configs = [
           'chrome',
+          'edge',
           'firefox'
         ].join(',')
 
