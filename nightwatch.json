@@ -63,6 +63,14 @@
       }
     },
 
+    "edge": {
+      "desiredCapabilities": {
+        "platform": "Windows 10",
+        "browserName": "MicrosoftEdge",
+        "version": "latest"
+      }
+    },
+
     "android_s4_emulator": {
       "desiredCapabilities": {
         "browserName": "android",

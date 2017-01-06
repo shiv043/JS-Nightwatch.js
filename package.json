@@ -8,6 +8,6 @@
   },
   "devDependencies": {
     "saucelabs": "1.3.0",
-    "nightwatch": "0.9.8"
+    "nightwatch": "git+https://git@github.com/bitwiseman/nightwatch.git#junit-classname"
   }
 }
