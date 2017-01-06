@@ -18,7 +18,8 @@ node {
           // Nightwatch.js supports color ouput, so wrap this step for ansi color
           wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
               // Run selenium tests using Nightwatch.js
-              sh './node_modules/.bin/nightwatch -e chrome'
+              // Ignore error codes. The junit publisher will cover setting build status.
+              sh './node_modules/.bin/nightwatch -e chrome || true'
           }
 
           junit 'reports/**'
