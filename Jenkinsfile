@@ -27,7 +27,7 @@ node {
           // Run selenium tests using Nightwatch.js
           // Ignore error codes. The junit publisher will cover setting build status.
           // Only run passing tests
-          sh './node_modules/.bin/nightwatch -e ${platform_configs} --test tests/guineaPig.js || true'
+          sh "./node_modules/.bin/nightwatch -e ${platform_configs} --test tests/guineaPig.js || true"
         }
 
         junit 'reports/**'
