@@ -15,7 +15,15 @@ node {
     sauce('f0a6b8ad-ce30-4cba-bf9a-95afbc470a8a') {
       // Start sauce connect
       sauceconnect(options: '', useGeneratedTunnelIdentifier: false, verboseLogging: false) {
+          // Nightwatch.js supports color ouput, so wrap this step for ansi color
+          wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
+              // Run selenium tests using Nightwatch.js
+              sh './node_modules/.bin/nightwatch -e chrome'
+          }
 
+          junit 'reports/**'
+
+          step([$class: 'SauceOnDemandTestPublisher'])
       }
     }
   }
