@@ -3,7 +3,7 @@ var SauceLabs = require("saucelabs");
 
 module.exports = {
 
-    '@tags': ['guineaPig'],
+    '@tags': ['guineaPig', 'smoke'],
 
     'Guinea Pig Assert Title': function(client) {
         client
