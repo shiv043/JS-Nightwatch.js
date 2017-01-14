@@ -15,5 +15,4 @@ exports.command = function(result) {
     }, function() {});
 
     console.log("SauceOnDemandSessionID=" + sessionid + " job-name=" + jobName);
-    this.end();
 };
