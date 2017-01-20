@@ -1,5 +1,9 @@
 pipeline {
     agent any
+    options {
+        // Nightwatch.js supports color ouput, so wrap add his option
+        ansiColor colorMapName: 'XTerm'
+    }
     stages {
         stage ("Build") {
             steps {
@@ -25,12 +29,9 @@ pipeline {
                                 'edge'
                             ].join(',')
 
-                            // Nightwatch.js supports color ouput, so wrap this step for ansi color
-                            wrap([$class: 'AnsiColorBuildWrapper', 'colorMapName': 'XTerm']) {
-                                // Run selenium tests using Nightwatch.js
-                                // Ignore error codes. The junit publisher will cover setting build status.
-                                sh "./node_modules/.bin/nightwatch -e ${platform_configs} --test tests/guineaPig.js || true"
-                            }
+                            // Run selenium tests using Nightwatch.js
+                            // Ignore error codes. The junit publisher will cover setting build status.
+                            sh "./node_modules/.bin/nightwatch -e ${platform_configs} --test tests/guineaPig.js || true"
 
                             step([$class: 'XUnitBuilder',
                                 thresholds: [
