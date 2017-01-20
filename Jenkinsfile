@@ -32,14 +32,16 @@ pipeline {
                             // Run selenium tests using Nightwatch.js
                             // Ignore error codes. The junit publisher will cover setting build status.
                             sh "./node_modules/.bin/nightwatch -e ${platform_configs} --test tests/guineaPig.js || true"
-
-                            junit 'reports/**'
-
-                            step([$class: 'SauceOnDemandTestPublisher'])
                         }
                     }
                 }
             }
+        }
+    }
+    post {
+        always {
+            junit 'reports/**'
+            step([$class: 'SauceOnDemandTestPublisher'])
         }
     }
 }
