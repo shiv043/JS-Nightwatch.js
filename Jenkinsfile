@@ -32,21 +32,24 @@ pipeline {
                             // Run selenium tests using Nightwatch.js
                             // Ignore error codes. The junit publisher will cover setting build status.
                             sh "./node_modules/.bin/nightwatch -e ${platform_configs} --test tests/guineaPig.js || true"
-
-                            step([$class: 'XUnitBuilder',
-                                thresholds: [
-                                    [$class: 'SkippedThreshold', failureThreshold: '0'],
-                                    // Allow for a significant number of failures
-                                    // Keeping this threshold so that overwhelming failures are guaranteed
-                                    //     to still fail the build
-                                    [$class: 'FailedThreshold', failureThreshold: '10']],
-                                tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
-
-                            step([$class: 'SauceOnDemandTestPublisher'])
                         }
                     }
                 }
             }
+        }
+    }
+    post {
+        always {
+            step([$class: 'XUnitBuilder',
+                thresholds: [
+                    [$class: 'SkippedThreshold', failureThreshold: '0'],
+                    // Allow for a significant number of failures
+                    // Keeping this threshold so that overwhelming failures are guaranteed
+                    //     to still fail the build
+                    [$class: 'FailedThreshold', failureThreshold: '10']],
+                tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
+
+            step([$class: 'SauceOnDemandTestPublisher'])
         }
     }
 }
