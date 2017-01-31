@@ -1,5 +1,10 @@
 pipeline {
     agent any
+    environment {
+        myMethod = { test ->
+            echo test
+        }
+    }
     options {
         // Nightwatch.js supports color ouput, so wrap add his option
         ansiColor colorMapName: 'XTerm'
@@ -7,12 +12,14 @@ pipeline {
     stages {
         stage ("Build") {
             steps {
+                myMethod('hello world!')
                 // Install dependencies
                 sh 'npm install'
             }
         }
         stage ("Test") {
             steps {
+
                 testWithSauceConnect {
                     // Run selenium tests using Nightwatch.js
                     // Ignore error codes. The junit publisher will cover setting build status.
