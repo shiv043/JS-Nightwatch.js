@@ -4,6 +4,11 @@ pipeline {
         // Nightwatch.js supports color ouput, so wrap add his option
         ansiColor colorMapName: 'XTerm'
     }
+    environment {
+        saucelabsCredentialId = 'f0a6b8ad-ce30-4cba-bf9a-95afbc470a8a'
+        sauceTestList = 'tests/guineaPig.js'
+        platformConfigs = 'chrome,firefox,ie,edge'
+    }
     stages {
         stage ("Build") {
             steps {
@@ -14,12 +19,12 @@ pipeline {
         stage ("Test") {
             steps {
                 // Add sauce credentials
-                sauce('f0a6b8ad-ce30-4cba-bf9a-95afbc470a8a') {
+                sauce(saucelabsCredentialId) {
                     // Start sauce connect
                     sauceconnect() {
                         // Run selenium tests using Nightwatch.js
                         // Ignore error codes. The junit publisher will cover setting build status.
-                        sh "./node_modules/.bin/nightwatch -e chrome,firefox,ie,edge --test tests/guineaPig.js || true"
+                        sh "./node_modules/.bin/nightwatch -e ${platformConfigs} --test ${sauceTestList} || true"
                     }
                 }
             }
