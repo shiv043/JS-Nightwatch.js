@@ -35,4 +35,12 @@ pipeline {
             }
         }
     }
+    stage ('Deploy') {
+        when {
+            branch 'master'
+        }
+        steps {
+             echo 'Placeholder for deploy steps.'
+        }
+    }
 }
