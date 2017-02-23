@@ -1,3 +1,5 @@
+@Library('bitwiseman-shared@blog/declarative/sauce') _
+
 pipeline {
     agent any
     options {
@@ -6,7 +8,7 @@ pipeline {
     }
     environment {
         saucelabsCredentialId = 'f0a6b8ad-ce30-4cba-bf9a-95afbc470a8a'
-        sauceTestList = 'tests/guineaPig.js'
+        sauceTestFilter = 'tests/guineaPig.js'
         platformConfigs = 'chrome,firefox,ie,edge'
     }
     stages {
@@ -18,26 +20,15 @@ pipeline {
         }
         stage ("Test") {
             steps {
-                // Add sauce credentials
-                sauce(saucelabsCredentialId) {
-                    // Start sauce connect
-                    sauceconnect() {
-                        // Run selenium tests using Nightwatch.js
-                        // Ignore error codes. The junit publisher will cover setting build status.
-                        sh "./node_modules/.bin/nightwatch -e ${platformConfigs} --test ${sauceTestList} || true"
-                    }
-                }
+                sauceNightwatch saucelabsCredentialId,
+                    platformConfigs,
+                    sauceTestFilter
             }
             post {
                 always {
-                    step([$class: 'XUnitBuilder',
-                        thresholds: [
-                            [$class: 'SkippedThreshold', failureThreshold: '0'],
-                            // Allow for a significant number of failures
-                            // Keeping this threshold so that overwhelming failures are guaranteed
-                            //     to still fail the build
-                            [$class: 'FailedThreshold', failureThreshold: '10']],
-                        tools: [[$class: 'JUnitType', pattern: 'reports/**']]])
+                    xUnitPublishResults 'reports/**',
+                        /* failWhenSkippedExceeds */ 0,
+                        /* failWhenFailedExceeds */ 10
 
                     saucePublisher()
                 }
