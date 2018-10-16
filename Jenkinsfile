@@ -5,7 +5,7 @@ pipeline {
         ansiColor colorMapName: 'XTerm'
     }
     environment {
-        saucelabsCredentialId = 'f0a6b8ad-ce30-4cba-bf9a-95afbc470a8a'
+        saucelabsCredentialId = '4b140c78-2f70-4e2b-a733-e556e02ecde9'
         sauceTestList = 'tests/guineaPig.js'
         platformConfigs = 'chrome,firefox,ie,edge'
     }
